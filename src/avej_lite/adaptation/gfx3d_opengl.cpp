@@ -155,9 +155,9 @@ namespace avej_lite { namespace gfx3d
 		s_egl_attrib.egl_surface_window = eglCreateWindowSurface(s_egl_attrib.egl_display, egl_config, s_egl_attrib.egl_window, NULL); // NULL -> config_attrib
 		CHECK_EGL_ERROR("eglCreateWindowSurface");
 
-#if defined(_WIN32) && defined(EGL_VERSION_1_3)
+#if defined(EGL_VERSION_1_3)
 		{
-			EGLint context_attrib[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+			EGLint context_attrib[] = { EGL_CONTEXT_CLIENT_VERSION, 1, EGL_NONE };
 			s_egl_attrib.egl_context = eglCreateContext(s_egl_attrib.egl_display, egl_config, NULL, context_attrib);
 		}
 #else

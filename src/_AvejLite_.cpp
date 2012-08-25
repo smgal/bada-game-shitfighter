@@ -196,7 +196,12 @@ AvejLiteApp::OnTimerExpired(Timer& timer)
 		__pTimer->Start(TIME_OUT);
 
 		if (!avej_launcher::Process())
+		{
+			__pTimer->Cancel();
+			avej_launcher::Finalize();
+
 			this->Terminate();
+		}
 	}
 }
 
