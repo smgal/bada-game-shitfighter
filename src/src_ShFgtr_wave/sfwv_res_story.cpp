@@ -1,3 +1,6 @@
+
+#include "sfwv_config.h"
+
 namespace miku
 {
 
@@ -340,12 +343,9 @@ unsigned char p_res_story[] =
 	0x0A, 0x00, 0x23, 0x00, 0x45, 0x00, 0x4E, 0x00, 0x44, 0x00, 0x0D, 0x00, 0x0A, 0x00,
 };
 
-#include "sfwv_config.h"
-
 unsigned long sizeof_p_res_story(void)
 {
 	return sizeof(p_res_story) / sizeof(tchar);
 }
 
 } // namespace miku
-

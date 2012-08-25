@@ -108,4 +108,3 @@ const miku::TRect REGION_SPECIAL = { 520, 480-MARGIN, MARGIN, MARGIN };
 
 
 #endif // #ifndef __SFWV_CONFIG_H__
-

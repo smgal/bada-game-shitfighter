@@ -419,7 +419,7 @@ bool  CGfxSurfaceImplBackBuffer::DrawLine(unsigned long color, TFixed16 x1, TFix
 
 	double LINE_THICK = 1.3;
 	double RADIAN_90  = 3.141592 / 2.0;
-	double angle = atan2(y2.m_data - y1.m_data, x2.m_data - x1.m_data);
+	double angle = atan2(double(y2.m_data - y1.m_data), double(x2.m_data - x1.m_data));
 	
 	int x[4] =
 	{
@@ -463,7 +463,7 @@ bool  CGfxSurfaceImplBackBuffer::DrawGradLine(unsigned long color1, unsigned lon
 
 	double LINE_THICK = 1.0;
 	double RADIAN_90  = 3.141592 / 2.0;
-	double angle = atan2(y2.m_data - y1.m_data, x2.m_data - x1.m_data);
+	double angle = atan2(double(y2.m_data - y1.m_data), double(x2.m_data - x1.m_data));
 	
 	int x[4] =
 	{

@@ -260,7 +260,6 @@ bool g_Game_Initialize(void)
 	// STATE_GAME_PLAY
 	p_system = new CSystem(STATE_TITLE);
 
-
 	return (p_system != 0);
 }
 
