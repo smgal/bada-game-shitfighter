@@ -140,7 +140,12 @@ void gfx::Init(void)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustumx(0, 800 << 16, 480 << 16, 0, 1000, 1000*100);
+
+	if (USE_ROTATION)
+		glFrustumx(0, _ToF16(SCREEN_HEIGHT).m_data, _ToF16(SCREEN_WIDTH).m_data, 0, 1000, 1000*100);
+	else
+		glFrustumx(0, _ToF16(SCREEN_WIDTH).m_data, _ToF16(SCREEN_HEIGHT).m_data, 0, 1000, 1000*100);
+
 	glMatrixMode(GL_MODELVIEW);
 }
 

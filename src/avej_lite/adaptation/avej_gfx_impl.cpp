@@ -334,14 +334,17 @@ void  CGfxSurfaceImplBackBuffer::m_Flush(unsigned long layer)
 		{
 			glTranslatex(0, 0, -(Z_ORIGIN + int(layer)*2));
 
-			if (0)
+			if (USE_ROTATION)
 			{
 				const  int FIXED_ONE = (1 << 16);
-				static int angle = 90;
+				static float angle = 90.0f;
 
-				glTranslatex(160*4, 120*4, 0);
-				glRotatex((angle << 16), 0, 0, FIXED_ONE);
-				glTranslatex(-160*4, -120*4, 0);
+				int transX = (SCREEN_HEIGHT * 2) << 16;
+				int transY = (SCREEN_HEIGHT * 2) << 16;
+
+				glTranslatex(transX, transY, 0);
+				glRotatex(int(angle * 65536.0f), 0, 0, FIXED_ONE);
+				glTranslatex(-transX, -transY, 0);
 			}
 
 			if (USE_PERSPECTIVE)

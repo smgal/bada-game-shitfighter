@@ -41,5 +41,6 @@ using namespace Osp::Graphics::Opengl;
 #define Z_FAR    (Z_NEAR * 100)
 
 #define USE_PERSPECTIVE  1
+#define USE_ROTATION     0
 
 #endif // #ifndef __GFX3D_CONFIG_H__
