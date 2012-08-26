@@ -89,7 +89,7 @@ namespace ending_bad
 
 	bool OnCreate(void)
 	{
-		util::CTextFileFromRes text_res((const tchar*)p_res_story, sizeof_p_res_story());
+		util::CTextFileFromRes text_res((const unsigned short*)p_res_story, sizeof_p_res_story());
 
 		if (text_res.IsValid())
 		{

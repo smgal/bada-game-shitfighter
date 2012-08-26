@@ -27,7 +27,7 @@ namespace menu_about
 
 	bool OnCreate(void)
 	{
-		p_text_res = new util::CTextFileFromRes((const tchar*)p_res_story, sizeof_p_res_story());
+		p_text_res = new util::CTextFileFromRes((const unsigned short*)p_res_story, sizeof_p_res_story());
 
 		tchar s[256];
 

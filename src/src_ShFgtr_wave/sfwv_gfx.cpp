@@ -44,21 +44,6 @@ namespace
 		ref_render_text.RenderText(x_dest, y_dest, sz_text_ucs2, color, fn_bit_blt);
 	}
 
-	void RenderText(int x_dest, int y_dest, const char* sz_text, unsigned long color, IorzRenderText::TFnBitBlt fn_bit_blt)
-	{
-
-		// 현재는 이 사이즈로 고정
-		static widechar w_str[256];
-
-		// 항상 UCS-2 형식의 wchar_t로 컴파일 되어야 한다.
-		typedef int TDUMMY[(sizeof(widechar) == sizeof(wchar_t)) ? 1 : -1];
-/*
-		ConvertUHC2UCS2(w_str, 256, sz_text, strlen(sz_text)+1);
-
-		RenderText(x_dest, y_dest, w_str, color, fn_bit_blt);
-*/
-	}
-
 	inline void s_ReviseTextSourCoord(int& x_sour, int& y_sour)
 	{
 		x_sour += 640;

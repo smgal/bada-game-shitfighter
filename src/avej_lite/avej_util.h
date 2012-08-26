@@ -84,6 +84,52 @@ namespace avej_lite
 				return (m_string[0] == 0);
 			}
 		};
+
+		template<typename T>
+		class auto_array
+		{
+		public:
+			explicit auto_array(T* ptr = 0)
+				: m_owns(ptr != 0)
+				, m_ptr((T*)ptr)
+			{
+			}
+
+			~auto_array()
+			{
+				if (m_owns)
+					delete[] (T*)m_ptr;
+			}
+
+			T& operator[](unsigned int index) const
+			{
+				return m_ptr[index];
+			}
+
+			void bind(T* ptr)
+			{
+				if (m_ptr == 0)
+				{
+					m_owns = (ptr != 0);
+					m_ptr = (T*)ptr;
+				}
+			}
+
+			T* get() const
+			{
+				return m_ptr;
+			}
+
+			T* release() const
+			{
+				((auto_array<T>*)this)->m_owns = false;
+				return m_ptr;
+			}
+
+		private:
+			bool  m_owns;
+			T* m_ptr;
+		};
 	}
 }
 

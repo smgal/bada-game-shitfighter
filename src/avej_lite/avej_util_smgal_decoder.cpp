@@ -373,7 +373,7 @@ namespace avej_lite
 
 			unsigned int file_length = file.GetSize();
 			
-			std::auto_ptr<unsigned char> buffer(new unsigned char[file_length]);
+			avej_lite::util::auto_array<unsigned char> buffer(new unsigned char[file_length]);
 			file.Read((char*)buffer.get(), file_length);
 
 			return DecodeSMgal(pixel_format, buffer.get(), file_length, out_surface_desc);

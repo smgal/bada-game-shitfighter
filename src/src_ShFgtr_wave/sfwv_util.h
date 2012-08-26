@@ -115,7 +115,7 @@ namespace miku
 		class CTextFileFromRes
 		{
 		public:
-			CTextFileFromRes(const tchar* sz_text_stream, int size);
+			CTextFileFromRes(const unsigned short* sz_text_stream, int size);
 			~CTextFileFromRes();
 
 			bool IsValid(void);

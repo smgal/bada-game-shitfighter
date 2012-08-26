@@ -14,7 +14,7 @@ void util::ClearKeyBuffer(void)
 	avej_lite::CInputDevice& input_device = avej_lite::singleton<avej_lite::CInputDevice>::get();
 	input_device.UpdateInputState();
 
-	// 키버퍼 소거
+	// remove key-buffer
 	for (avej_lite::TInputKey key = avej_lite::INPUT_KEY_BEGIN; key < avej_lite::INPUT_KEY_END; inc_(key))
 		input_device.WasKeyPressed(key);
 }
@@ -25,12 +25,24 @@ void util::ClearKeyBuffer(void)
 struct util::CTextFileFromRes::TImpl
 {
 public:
-	TImpl(const tchar* sz_text_stream, int size)
+	TImpl(const unsigned short* sz_text_stream, int size)
 	{
-		const tchar* p_stream_beg = sz_text_stream;
-		const tchar* p_stream_end = sz_text_stream + size;
+		if (sizeof(unsigned short) != sizeof(tchar))
+		{
+			m_text_stream.bind(new tchar[size]);
 
-		const tchar* p_stream = sz_text_stream;
+			const unsigned short* p_src = sz_text_stream;
+			tchar* p_dst = m_text_stream.get();
+			tchar* p_dst_end = p_dst + size;
+
+			while (p_dst < p_dst_end)
+				*p_dst++ = tchar(*p_src++);
+		}
+
+		const tchar* p_stream_beg = (m_text_stream.get()) ? m_text_stream.get() : reinterpret_cast<const tchar*>(sz_text_stream);
+		const tchar* p_stream_end = p_stream_beg + size;
+
+		const tchar* p_stream = p_stream_beg;
 
 		while (p_stream < p_stream_end)
 		{
@@ -44,7 +56,7 @@ public:
 
 			++p_stream;
 
-			// <CR>로 종료
+			// end of file with <CR>
 			if (p_stream >= p_stream_end)
 				break;
 
@@ -84,6 +96,8 @@ public:
 	}
 
 private:
+	avej_lite::util::auto_array<tchar> m_text_stream;
+
 	typedef std::pair<const tchar*, const tchar*> TParagraph;
 
 	std::vector<TParagraph>           m_paragraph_list;
@@ -91,7 +105,7 @@ private:
 
 };
 
-util::CTextFileFromRes::CTextFileFromRes(const tchar* sz_text_stream, int size)
+util::CTextFileFromRes::CTextFileFromRes(const unsigned short* sz_text_stream, int size)
 : m_p_impl(new TImpl(sz_text_stream, size))
 {
 }
@@ -250,4 +264,3 @@ int util::tnumchar(const tchar* str1)
 }
 
 } // namespace miku
-
